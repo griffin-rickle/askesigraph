@@ -1,0 +1,6 @@
+data
+__pycache__
+venv
+.mypy_cache
+.ropeproject
+AskesiGraph.egg-info

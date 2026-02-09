@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AskesiGraph"
+version = "0.1.0"
+description = "Askesis-driven graph tooling built on RDF and disciplined data flow"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Griffin Rickle" }
+]
+
+dependencies = [
+  "pyoxigraph",
+  "pydantic",
+  "openpyxl",
+  "matplotlib"
+]
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.package-data]
+askesigraph = ["py.typed"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+akg = "askesigraph.cli:main"
+
+# -----------------------------
+# Development / LSP Tooling
+# -----------------------------
+[project.optional-dependencies]
+dev = [
+  # LSP
+  "python-lsp-server[all]",
+  "pylsp-mypy",
+
+  # Formatting / imports
+  "black",
+  "isort",
+
+  # Type checking
+  "mypy",
+  "types-openpyxl",
+
+  # Refactoring / auto-imports
+  "rope",
+
+  # Debugging
+  "debugpy",
+]
+
+# -----------------------------
+# Tool Configuration
+# -----------------------------
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["askesigraph"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+show_error_codes = true
+plugins = "pydantic.mypy"
+
+[tool.pylsp-mypy]
+enabled = true
+strict = true
+live_mode = true
+
+[[tool.mypy.overrides]]
+module = ["pyoxigraph"]
+ignore_missing_imports = true
