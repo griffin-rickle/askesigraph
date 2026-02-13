@@ -18,7 +18,7 @@ dependencies = [
   "pyoxigraph",
   "pydantic",
   "openpyxl",
-  "matplotlib"
+  "matplotlib",
 ]
 [tool.setuptools]
 package-dir = { "" = "src" }
