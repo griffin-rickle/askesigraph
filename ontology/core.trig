@@ -1,0 +1,75 @@
+@prefix akg: <http://askesigraph.com/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+# Core Classes
+akg:BodyMeasurement a owl:Class ;
+    rdfs:label "Body Measurement"@en ;
+    rdfs:comment "A time-series measurement of body composition and metabolic markers"@en .
+
+akg:MeasurementSource a owl:Class ;
+    rdfs:label "Measurement Source"@en ;
+    rdfs:comment "A device or system that produces measurements"@en .
+
+# Core Properties - Temporal
+akg:measuredAt a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "measured at"@en .
+
+# Core Properties - Body Composition (SI units)
+akg:weightKg a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    qudt:hasUnit unit:KiloGM ;
+    rdfs:label "weight in kilograms"@en .
+
+akg:bodyFatPercentage a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "body fat percentage"@en ;
+    rdfs:comment "Percentage of total body mass composed of fat tissue"@en .
+
+akg:muscleMassKg a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    qudt:hasUnit unit:KiloGM .
+
+akg:boneMassKg a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    qudt:hasUnit unit:KiloGM .
+
+akg:bodyWaterPercentage a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal .
+
+# Core Properties - Metabolic
+akg:basalMetabolicRate a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:integer ;
+    qudt:hasUnit unit:KiloCAL-PER-DAY ;
+    rdfs:label "basal metabolic rate"@en .
+
+akg:metabolicAge a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Estimated metabolic age based on BMR and body composition"@en .
+
+# Core Properties - Derived/Calculated
+akg:bmi a owl:DatatypeProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "body mass index"@en .
+
+# Provenance
+akg:measuredBy a owl:ObjectProperty ;
+    rdfs:domain akg:BodyMeasurement ;
+    rdfs:range akg:MeasurementSource .
+
+akg:derivedFrom a owl:ObjectProperty ;
+    rdfs:label "derived from"@en ;
+    rdfs:comment "Links core measurement to source vendor measurement"@en .

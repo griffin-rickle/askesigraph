@@ -1,0 +1,49 @@
+# ontology/mapping.ttl
+@prefix map: <http://askesigraph.com/mapping#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2001/XMLSchema#> .
+
+# Mapping Classes
+map:PropertyMapping a owl:Class ;
+    rdfs:label "Property Mapping"@en ;
+    rdfs:comment "Describes how a vendor property maps to core ontology"@en .
+
+map:TransformationFunction a owl:Class ;
+    rdfs:label "Transformation Function"@en .
+
+# Mapping Properties
+map:sourceProperty a owl:ObjectProperty ;
+    rdfs:domain map:PropertyMapping ;
+    rdfs:comment "The vendor property being mapped"@en .
+
+map:targetProperty a owl:ObjectProperty ;
+    rdfs:domain map:PropertyMapping ;
+    rdfs:comment "The core property being mapped to"@en .
+
+map:transformation a owl:ObjectProperty ;
+    rdfs:domain map:PropertyMapping ;
+    rdfs:range map:TransformationFunction .
+
+# Transformation types
+map:MultiplyTransform a owl:Class ;
+    rdfs:subClassOf map:TransformationFunction .
+
+map:DateTimeTransform a owl:Class ;
+    rdfs:subClassOf map:TransformationFunction .
+
+map:DirectMapping a owl:Class ;
+    rdfs:subClassOf map:TransformationFunction ;
+    rdfs:comment "1:1 mapping with no transformation"@en .
+
+# Transformation parameters
+map:factor a owl:DatatypeProperty ;
+    rdfs:domain map:MultiplyTransform ;
+    rdfs:range xsd:decimal .
+
+map:sourceFormat a owl:DatatypeProperty ;
+    rdfs:domain map:DateTimeTransform ;
+    rdfs:range xsd:string .
+
+map:targetFormat a owl:DatatypeProperty ;
+    rdfs:domain map:DateTimeTransform ;
+    rdfs:range xsd:string .

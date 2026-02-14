@@ -1,0 +1,69 @@
+# mappings/arboleaf-to-core.ttl
+@prefix map: <http://askesigraph.com/mapping#> .
+@prefix akg: <http://askesigraph.com/ontology#> .
+@prefix arboleaf: <http://askesigraph.com/vendor/arboleaf#> .
+@prefix arb-map: <http://askesigraph.com/mappings/arboleaf#> .
+
+# Weight mapping (lb → kg)
+arb-map:weightMapping a map:PropertyMapping ;
+    rdfs:label "Arboleaf weight to core weight"@en ;
+    map:sourceProperty arboleaf:weightLb ;
+    map:targetProperty akg:weightKg ;
+    map:transformation [
+        a map:MultiplyTransform ;
+        map:factor 0.453592
+    ] .
+
+# Muscle mass mapping (lb → kg)
+arb-map:muscleMassMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:muscleMassLb ;
+    map:targetProperty akg:muscleMassKg ;
+    map:transformation [
+        a map:MultiplyTransform ;
+        map:factor 0.453592
+    ] .
+
+# Bone mass mapping (lb → kg)
+arb-map:boneMassMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:boneMassLb ;
+    map:targetProperty akg:boneMassKg ;
+    map:transformation [
+        a map:MultiplyTransform ;
+        map:factor 0.453592
+    ] .
+
+# Direct mappings (no transformation)
+arb-map:bodyFatMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:bodyFatPercentage ;
+    map:targetProperty akg:bodyFatPercentage ;
+    map:transformation [ a map:DirectMapping ] .
+
+arb-map:bodyWaterMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:bodyWaterPercentage ;
+    map:targetProperty akg:bodyWaterPercentage ;
+    map:transformation [ a map:DirectMapping ] .
+
+arb-map:bmrMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:bmrKcal ;
+    map:targetProperty akg:basalMetabolicRate ;
+    map:transformation [ a map:DirectMapping ] .
+
+arb-map:bmiMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:bmi ;
+    map:targetProperty akg:bmi ;
+    map:transformation [ a map:DirectMapping ] .
+
+arb-map:metabolicAgeMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:metabolicAge ;
+    map:targetProperty akg:metabolicAge ;
+    map:transformation [ a map:DirectMapping ] .
+
+# Temporal mapping (string → dateTime)
+arb-map:timestampMapping a map:PropertyMapping ;
+    map:sourceProperty arboleaf:measureTime ;
+    map:targetProperty akg:measuredAt ;
+    map:transformation [
+        a map:DateTimeTransform ;
+        map:sourceFormat "%m/%d/%Y %H:%M:%S" ;
+        map:targetFormat xsd:dateTime
+    ] .

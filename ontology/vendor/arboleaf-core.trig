@@ -1,0 +1,70 @@
+# ontology/vendor/arboleaf.ttl
+@prefix arboleaf: <http://askesigraph.com/vendor/arboleaf#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arboleaf:Measurement a owl:Class ;
+    rdfs:label "Arboleaf Scale Measurement"@en ;
+    rdfs:comment "Raw measurement from Arboleaf smart scale export"@en .
+
+# Temporal (vendor-specific format)
+arboleaf:measureTime a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Format: MM/DD/YYYY HH:MM:SS"@en .
+
+# Body metrics (imperial units as provided by device)
+arboleaf:weightLb a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:bodyFatPercentage a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:muscleMassLb a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:boneMassLb a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:bodyWaterPercentage a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:bmrKcal a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:integer .
+
+arboleaf:bmi a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:metabolicAge a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+# Vendor-specific properties (no core equivalent)
+arboleaf:muscleStorageAbilityLevel a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Proprietary Arboleaf metric"@en .
+
+arboleaf:subcutaneousFatPercentage a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:decimal .
+
+arboleaf:visceralFatLevel a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:integer .
+
+# Device provenance
+arboleaf:deviceMacAddress a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:string .
+
+arboleaf:deviceName a owl:DatatypeProperty ;
+    rdfs:domain arboleaf:Measurement ;
+    rdfs:range xsd:string .
