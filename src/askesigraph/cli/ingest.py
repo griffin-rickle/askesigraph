@@ -24,7 +24,7 @@ def register_subcommand(subparsers) -> None:
     )
     ingest_parser.add_argument(
         "source",
-        choices=["arboleaf", "withings", "garmin"],
+        choices=["arboleaf", "myfitnesspal", "garmin"],
         help="Data source type",
     )
     ingest_parser.add_argument(
@@ -43,7 +43,7 @@ def handle_command(args: argparse.Namespace) -> None:
     """Handle ingest command"""
     if args.source == "arboleaf":
         ingest_arboleaf(args)
-    elif args.source == "withings":
+    elif args.source == "myfitnesspal":
         print(f"Error: Source '{args.source}' not yet implemented")
         sys.exit(1)
     elif args.source == "garmin":
