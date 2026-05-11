@@ -1,7 +1,8 @@
 # ontology/mapping.ttl
 @prefix map: <http://askesigraph.com/mapping#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Mapping Classes
 map:PropertyMapping a owl:Class ;

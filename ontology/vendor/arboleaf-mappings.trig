@@ -1,5 +1,7 @@
 # mappings/arboleaf-to-core.ttl
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix map: <http://askesigraph.com/mapping#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix akg: <http://askesigraph.com/ontology#> .
 @prefix arboleaf: <http://askesigraph.com/vendor/arboleaf#> .
 @prefix arb-map: <http://askesigraph.com/mappings/arboleaf#> .

@@ -18,4 +18,4 @@ class GraphNames:
     ONTOLOGY_MAPPING = NamedNode("http://askesigraph.com/graph/ontology/mapping")
     
     # Mapping instances
-    MAPPINGS = NamedNode("http://askesigraph.com/graph/mappings")
+    MAPPINGS = NamedNode("http://askesigraph.com/graph/ontology/mappings")

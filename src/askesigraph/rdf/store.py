@@ -1,3 +1,4 @@
+import pyoxigraph
 """
 RDF store wrapper for Oxigraph.
 
@@ -9,6 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from pyoxigraph import Store, NamedNode
+from typing import Iterator
 
 
 class RDFStore:
@@ -37,26 +39,13 @@ class RDFStore:
         """
         # Determine MIME type from extension
         extension = file_path.suffix.lower()
-        mime_type_map = {
-            ".ttl": "text/turtle",
-            ".turtle": "text/turtle",
-            ".rdf": "application/rdf+xml",
-            ".nt": "application/n-triples",
-            ".nq": "application/n-quads",
-        }
-
-        mime_type = mime_type_map.get(extension, "text/turtle")
+        rdf_format = pyoxigraph.RdfFormat.from_extension(extension)
 
         # Count triples before
         count_before = self.count_triples(graph)
 
         # Load the file
-        with open(file_path, "rb") as f:
-            self.store.load(
-                f,
-                mime_type=mime_type,
-                to_graph=graph,
-            )
+        self.store.load(path=file_path, to_graph=graph)
 
         # Count triples after
         count_after = self.count_triples(graph)
@@ -89,7 +78,7 @@ class RDFStore:
 
         result = list(self.store.query(query))
         if result:
-            return int(result[0]["count"])
+            return int(result[0]["count"].value)
         return 0
 
     def clear_graph(self, graph: NamedNode) -> None:

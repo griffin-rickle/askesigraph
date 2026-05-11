@@ -53,7 +53,7 @@ class MeasurementQuery:
         
         SELECT ?measurement ?timestamp ?weightKg ?bodyFat ?muscleMass 
                ?boneMass ?bodyWater ?bmr ?bmi ?metabolicAge ?vendorSource
-        FROM <{GraphNames.CORE}>
+        FROM {GraphNames.CORE}
         WHERE {{
             ?measurement a akg:BodyMeasurement ;
                         akg:measuredAt ?timestamp .
